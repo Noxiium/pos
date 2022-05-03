@@ -1,13 +1,23 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package se.kth.iv1350.pos.integration;
 
-/**
- *
- * @author PC
- */
-public class ItemDTO {
+import javax.sound.midi.SysexMessage;
+
+public class Item {
+    private int itemID;
+    private String nameOfItem;
+    private float priceOfItem;
+    private float VATOfItem;
     
+    public Item(int itemID, String nameOfItem, float priceOfItem, float VATOfItem) {
+        this.itemID = itemID;
+        this.nameOfItem = nameOfItem;
+        this.priceOfItem = priceOfItem;
+        this.VATOfItem = VATOfItem;
+    }
+    
+    public int getItemID(){return itemID;}
+    public String getNameOfItem(){return nameOfItem;}
+    public float returnItemPrice(){return priceOfItem;}
+    public float returnItemVAT(){return VATOfItem;}
+   
 }

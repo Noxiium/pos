@@ -1,11 +1,9 @@
-se\kth\iv1350\pos\controller\Controller.class
-se\kth\iv1350\pos\model\AllItemsInCurrentSale.class
 se\kth\iv1350\pos\model\Payment.class
 se\kth\iv1350\pos\view\View.class
-se\kth\iv1350\pos\model\CashRegister.class
 se\kth\iv1350\pos\model\Receipt.class
+se\kth\iv1350\pos\controller\Controller.class
+se\kth\iv1350\pos\model\CashRegister.class
 se\kth\iv1350\pos\startup\Main.class
 se\kth\iv1350\pos\model\Sale.class
 se\kth\iv1350\pos\model\Amount.class
-se\kth\iv1350\pos\integration\ItemDTO.class
 se\kth\iv1350\pos\integration\Printer.class

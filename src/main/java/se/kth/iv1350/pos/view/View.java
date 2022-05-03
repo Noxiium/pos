@@ -1,5 +1,6 @@
 package se.kth.iv1350.pos.view;
 
+import java.util.Scanner;
 import se.kth.iv1350.pos.controller.Controller;
 
 /**
@@ -25,6 +26,7 @@ public class View {
     public void runFakeExecution(){
         contr.startNewSale();
         System.out.println("New Sale");
+        
         
     }
     

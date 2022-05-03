@@ -1,6 +1,9 @@
 package se.kth.iv1350.pos.controller;
 
+import se.kth.iv1350.pos.integration.AccountingSystem;
+import se.kth.iv1350.pos.integration.InventorySystem;
 import se.kth.iv1350.pos.integration.Printer;
+import se.kth.iv1350.pos.integration.Item;
 import se.kth.iv1350.pos.model.CashRegister;
 import se.kth.iv1350.pos.model.Sale;
 
@@ -9,6 +12,8 @@ import se.kth.iv1350.pos.model.Sale;
  * 
  */
 public class Controller {
+    private AccountingSystem accountingSystem;
+    private InventorySystem inventorySystem;
     private Sale sale;
     
     /**
@@ -16,5 +21,17 @@ public class Controller {
      */
     public void startNewSale(){
         sale = new Sale();
+    }
+    /**
+     * adds item to sale. Checks with inventorySystem to see if item exist.
+     */
+    public void addItemToSale(int id) {
+        Item item = inventorySystem.returnItemToSale(id);
+        sale.addItemToSale(item);
+    }
+    
+    public void addItemToSale(int id, int quantity) {
+        Item item = inventorySystem.returnItemToSale(id);
+        sale.addItemToSale(item, quantity);
     }
 }
