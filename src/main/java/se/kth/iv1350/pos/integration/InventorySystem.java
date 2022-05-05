@@ -56,6 +56,25 @@ public class InventorySystem {
         inventory.put(item, quantity);
     }
     
+    public void updateInventory(HashMap<Item, Integer> soldItemsInFinishedSale){
+        for(Item soldItem : soldItemsInFinishedSale.keySet())
+        {
+            for(Item invItem : inventory.keySet()) {
+                if(soldItem.getItemID()==invItem.getItemID())
+                    inventory.replace(invItem, (inventory.get(invItem)-soldItemsInFinishedSale.get(soldItem)));
+                
+                inventory.containsKey(soldItem);
+            }
+        }
+    }
+    
+    public int checkInventory(int itemID){
+        for(Item item : inventory.keySet()) {
+           if (item.getItemID()==itemID) return inventory.get(item);
+		}
+       return 0;
+    }
+    
     
     
 }

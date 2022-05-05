@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" name="se.kth.iv1350.pos.view.ViewTest" time="0" tests="1" errors="0" skipped="0" failures="0">
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" name="se.kth.iv1350.pos.model.SaleTest" time="0.005" tests="8" errors="0" skipped="0" failures="0">
   <properties>
     <property name="java.specification.version" value="18"/>
     <property name="sun.cpu.isalist" value="amd64"/>
@@ -58,5 +58,12 @@
     <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
     <property name="java.class.version" value="62.0"/>
   </properties>
-  <testcase name="testRunFakeExecution" classname="se.kth.iv1350.pos.view.ViewTest" time="0"/>
+  <testcase name="testAddItemToSale_Item_ItemIsInCurrentSale" classname="se.kth.iv1350.pos.model.SaleTest" time="0"/>
+  <testcase name="testAddItemToSale_Item_int_ItemIsInCurrentSale" classname="se.kth.iv1350.pos.model.SaleTest" time="0"/>
+  <testcase name="testCalculate_withManyItems" classname="se.kth.iv1350.pos.model.SaleTest" time="0"/>
+  <testcase name="testCalculate_getTotalVAT" classname="se.kth.iv1350.pos.model.SaleTest" time="0"/>
+  <testcase name="testCalculate_getTotalPrice" classname="se.kth.iv1350.pos.model.SaleTest" time="0.003"/>
+  <testcase name="testAddItemToSale_Item_ItemIsNotCurrentSale" classname="se.kth.iv1350.pos.model.SaleTest" time="0"/>
+  <testcase name="testAddItemToSale_Item_int_ItemNotInCurrentSale" classname="se.kth.iv1350.pos.model.SaleTest" time="0"/>
+  <testcase name="testCalculate_getTotalPriceIncludingVAT" classname="se.kth.iv1350.pos.model.SaleTest" time="0.001"/>
 </testsuite>

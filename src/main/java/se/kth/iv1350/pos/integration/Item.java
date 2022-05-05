@@ -17,7 +17,7 @@ public class Item {
     
     public int getItemID(){return itemID;}
     public String getNameOfItem(){return nameOfItem;}
-    public float returnItemPrice(){return priceOfItem;}
-    public float returnItemVAT(){return VATOfItem;}
+    public float getItemPrice(){return priceOfItem;}
+    public float getItemVAT(){return VATOfItem;}
    
 }

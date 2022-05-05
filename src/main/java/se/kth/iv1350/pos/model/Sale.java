@@ -16,7 +16,8 @@ public class Sale {
     private LocalTime saleTime;
     private float totalPrice;
     private float totalVAT;
-    private  Receipt receipt;
+    private float totalPriceIncludingVAT;
+    
     private HashMap<Item, Integer> listOfAllItemsInCurrentSale;
     
     /**
@@ -29,7 +30,7 @@ public class Sale {
         saleTime = LocalTime.now();
         totalPrice = 0;
         totalVAT = 0;
-        receipt = new Receipt();
+        totalPriceIncludingVAT = 0;
         listOfAllItemsInCurrentSale =new HashMap<Item, Integer>();
     }
     /**
@@ -45,8 +46,9 @@ public class Sale {
         }
             
         else
-            listOfAllItemsInCurrentSale.put(item, 1);    
-     
+            listOfAllItemsInCurrentSale.put(item, 1);  
+        
+        CalculateTotalIncludingVAT();
     }
     /**
      * Overloaded addItemToSale
@@ -60,11 +62,15 @@ public class Sale {
         }
             
         else
-            listOfAllItemsInCurrentSale.put(item, 1);    
-     
+            listOfAllItemsInCurrentSale.put(item, quantity);
+            
+        CalculateTotalIncludingVAT();
     }
+    
     /**
-     * Method used to check if an item is in the hashmap. returns true if true.
+     * Method used to check if an item is in the hash map. returns true if true.
+     * @param item to check
+     * @return boolean
      */
     public boolean checkIfItemIsInCurrentSale(Item item){
         for(Item i : listOfAllItemsInCurrentSale.keySet()){
@@ -72,6 +78,32 @@ public class Sale {
                 return true; 
         }
         return false;
+    }
+    
+
+    
+    private void CalculateTotalIncludingVAT(){
+        //reset
+        totalPrice = 0;
+        totalVAT = 0;
+        totalPriceIncludingVAT = 0;
+        for(Item item : listOfAllItemsInCurrentSale.keySet()){
+            totalPrice += item.getItemPrice()*listOfAllItemsInCurrentSale.get(item);
+            totalVAT += item.getItemPrice()*item.getItemVAT()*listOfAllItemsInCurrentSale.get(item);
+        }
+        totalPriceIncludingVAT = totalPrice + totalVAT;
+    }
+    
+    public float getTotalPrice(){return totalPrice;}
+    public float getTotalVAT(){return totalVAT;}
+    public float getTotalPriceIncludingVAT(){return totalPriceIncludingVAT;}
+    public HashMap<Item, Integer> getAllItems() {
+		return listOfAllItemsInCurrentSale;
+	}
+    
+    public Receipt getReceipt(){
+        return new Receipt(saleDate, saleTime, totalVAT, totalPriceIncludingVAT, listOfAllItemsInCurrentSale);
+            //saleDTO as paramater. from controller? add paid and change
     }
     
     

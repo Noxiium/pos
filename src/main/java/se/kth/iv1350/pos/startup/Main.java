@@ -1,7 +1,6 @@
 package se.kth.iv1350.pos.startup;
 
 import se.kth.iv1350.pos.controller.Controller;
-import se.kth.iv1350.pos.integration.Printer;
 import se.kth.iv1350.pos.view.View;
 
 /**
