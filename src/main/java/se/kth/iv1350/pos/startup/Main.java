@@ -8,16 +8,17 @@ import se.kth.iv1350.pos.view.View;
   * 
   */ 
 public class Main {
-    /**
-      * Starts the application
-      */
     
+    /**
+      * Starts the program. Creates instances.
+      * 
+      * @Param args Command line arg is not used.
+      */
     public static void main (String[] args){
         //Printer printer = new Printer();
         Controller contr = new Controller();
         View view = new View(contr);
         view.runFakeExecution();
-        
     }
     
 }

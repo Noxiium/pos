@@ -2,25 +2,28 @@ package se.kth.iv1350.pos.controller;
 
 import se.kth.iv1350.pos.integration.AccountingSystem;
 import se.kth.iv1350.pos.integration.InventorySystem;
-import se.kth.iv1350.pos.integration.Item;
-import se.kth.iv1350.pos.model.CashRegister;
+import se.kth.iv1350.pos.dto.ItemDTO;
+import se.kth.iv1350.pos.dto.Receipt;
+import se.kth.iv1350.pos.model.Register;
 import se.kth.iv1350.pos.model.Sale;
-import se.kth.iv1350.pos.view.View;
 
 /**
- * The only controller. All calls to model passes through this class.
- * 
+ * The only controller for the POS system. 
+ * All calls to model passes through this class.
  */
 public class Controller {
     private AccountingSystem accountingSystem;
     private InventorySystem inventorySystem;
     private Sale sale;
-    private CashRegister cashRegister;
+    private Register cashRegister;
     
+    /**
+     * Creates a new instance.
+     */
     public Controller (){
         accountingSystem = new AccountingSystem();
         inventorySystem = new InventorySystem();
-        cashRegister = new CashRegister();
+        cashRegister = new Register();
     }
     
     /**
@@ -29,42 +32,47 @@ public class Controller {
     public void startNewSale(){
         sale = new Sale();
     }
-    
-    public Sale getSale(){
-        return sale;
-    }
+   
     /**
-     * adds item to sale. Checks with inventorySystem to see if item exist.
+     * Gets information from inventory system and adds item to sale.
+     * @param id Identifier of scanned item
+     * @param quantity Amount of items to add
+     * @return 
      */
-    public Item addItemToSale(int id) {
-        Item item = inventorySystem.returnItemToSale(id);
-        sale.addItemToSale(item);
-        return item;
-        
-        
-    }
-    /**
-     * adds item to sale with quantity. Checks with inventorySystem to see if item exist.
-     */
-    public Item addItemToSale(int id, int quantity) {
-        Item item = inventorySystem.returnItemToSale(id);
+    public ItemDTO addItemToSale(int id, int quantity) {
+        ItemDTO item = inventorySystem.returnItemToSale(id);
         sale.addItemToSale(item, quantity);
         return item;
     }
     
-    public float endSale(int payment) {
+    /**
+     * Ends the current Sale. Updates external systems, 
+     * updates amount in register and prints receipt
+     * @param payment Amount that costumer gave to cashier
+     */
+    public void endSale(int payment) {
         accountingSystem.logCurrentSale(sale);
         inventorySystem.updateInventory(sale.getAllItems());
-        float total = sale.getTotalPriceIncludingVAT();
-        cashRegister.updateAmountInRegister(total);
-        cashRegister.print(sale.getReceipt());
-        return payment - total;
+        cashRegister.updateAmountInRegister(sale.getTotalPriceIncludingVAT());
+        cashRegister.printReceipt(getReceipt(sale), sale.getChangeToGiveToCostumer(payment), payment);
+        startNewSale();
         
     }
     
+    /**
+     * Gets the total price of sale, including VAT
+     * @return The total price of a Sale
+     */
     public float getTotalPriceOfSale(){
         return sale.getTotalPriceIncludingVAT();
     }
     
-    
+    /**
+     * Creates a new Receipt for the finished sale.
+     * @param sale Sale information from a finished sale
+     * @return Receipt The receipt that will be printed.
+     */
+    public Receipt getReceipt(Sale sale){
+        return new Receipt(sale);
+    }
 }

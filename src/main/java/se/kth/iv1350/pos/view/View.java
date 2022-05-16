@@ -2,50 +2,50 @@ package se.kth.iv1350.pos.view;
 
 import java.util.Scanner;
 import se.kth.iv1350.pos.controller.Controller;
-import se.kth.iv1350.pos.integration.Item;
+import se.kth.iv1350.pos.dto.ItemDTO;
 
 /**
  * A placeholder for the real view. 
- * Print outs will be a temp for the view
+ * Runs a fake Execution simulating the view of the program.
+ * 
  */
 public class View {
     private Controller contr;
     
     /**
-     * Creates a new instance
+     * Creates a new instance. Saves Controller.
      * 
-     * @param contr
+     * @param contr Controller that the view uses.
      */
     public View(Controller contr){
         this.contr = contr;
     }
     
-    
-    
     /**
-     * runFakeExecution simulates the 
-     * view with printOuts in the terminal
+     * Simulates the view of a Sale with print outs.
+     * 
      */
     public void runFakeExecution(){
         contr.startNewSale();
         System.out.println("New Sale");
         addAndprintAddedItem(1,2);
-        addAndprintAddedItem(4);
+        addAndprintAddedItem(4,1);
         addAndprintAddedItem(2,2);
+        contr.endSale(200);
+        
+        contr.startNewSale();
+        System.out.println("New Sale");
+        addAndprintAddedItem(1,1);
         contr.endSale(100);
-        System.out.println();
+        
+        
     }
     
     private void addAndprintAddedItem(int itemID, int quantity){
-        Item item = contr.addItemToSale(itemID, quantity);
+        ItemDTO item = contr.addItemToSale(itemID, quantity);
         System.out.println("Item added: " + item.getNameOfItem() + " " + item.getItemPrice() + "kr");
         System.out.println("Total: " + contr.getTotalPriceOfSale()+ "kr");
     }
     
-    private void addAndprintAddedItem(int itemID){
-        Item item = contr.addItemToSale(itemID);
-        System.out.println("Item added " + item.getNameOfItem() + " " + item.getItemPrice() + "kr");
-        System.out.println("Total: " + contr.getTotalPriceOfSale() + "kr");
-    }
     
 }

@@ -4,7 +4,7 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
-import se.kth.iv1350.pos.integration.Item;
+import se.kth.iv1350.pos.dto.ItemDTO;
 
 public class SaleTest {
     private Sale saleTest;
@@ -19,31 +19,11 @@ public class SaleTest {
         Sale saleTest = null;
     }
 
+   
     @Test
-    public void testAddItemToSale_Item_ItemIsNotCurrentSale() {
-        Item testItem = new Item(1, "test", 10, 0.25f);
-        saleTest.addItemToSale(testItem);
-        int compareExpAmount = 1;
-        int amount = saleTest.getAllItems().get(testItem);
-        assertEquals(compareExpAmount, amount, "item was not added to hashmap. If this failed next 3 also fails");
-    }
-    
-    @Test
-    public void testAddItemToSale_Item_ItemIsInCurrentSale() {
-        Item testItem = new Item(1, "test", 10, 0.25f);
-        saleTest.addItemToSale(testItem);
-        saleTest.addItemToSale(testItem);
-        int compareExpAmount = 2;
-        int amount = saleTest.getAllItems().get(testItem);
-        assertEquals(compareExpAmount, amount, "adding two of the same items at different times does not work yet");
-    }
-    
-
-
-    @Test
-    public void testAddItemToSale_Item_int_ItemNotInCurrentSale() {
+    public void testAddItemToSale_ItemNotInCurrentSale() {
         int quantity = 3;
-        Item testItem = new Item(1, "test", 10, 0.25f);
+        ItemDTO testItem = new ItemDTO(1, "test", 10, 0.25f);
         saleTest.addItemToSale(testItem, quantity);
         int compareExpAmount = quantity;
         int amount = saleTest.getAllItems().get(testItem);
@@ -51,10 +31,10 @@ public class SaleTest {
     }
     
     @Test
-    public void testAddItemToSale_Item_int_ItemIsInCurrentSale() {
+    public void testAddItemToSale_ItemIsInCurrentSale() {
         int quantity = 3;
-        Item testItem = new Item(1, "test", 10, 0.25f);
-        saleTest.addItemToSale(testItem);
+        ItemDTO testItem = new ItemDTO(1, "test", 10, 0.25f);
+        saleTest.addItemToSale(testItem,1);
         saleTest.addItemToSale(testItem, (quantity));
         int compareExpAmount = quantity+1;
         int amount = saleTest.getAllItems().get(testItem);
@@ -67,7 +47,7 @@ public class SaleTest {
         float testItemPrice = 10;
         float testItemVAT = 0.25f;
         
-        Item testItem = new Item(1, "test", testItemPrice, testItemVAT);
+        ItemDTO testItem = new ItemDTO(1, "test", testItemPrice, testItemVAT);
         saleTest.addItemToSale(testItem, quantity);
         float total = saleTest.getTotalPriceIncludingVAT();
         float expected = (testItemPrice*(1+testItemVAT)*quantity);
@@ -80,7 +60,7 @@ public class SaleTest {
         float testItemPrice = 10;
         float testItemVAT = 0.25f;
         
-        Item testItem = new Item(1, "test", testItemPrice, testItemVAT);
+        ItemDTO testItem = new ItemDTO(1, "test", testItemPrice, testItemVAT);
         saleTest.addItemToSale(testItem, quantity);
         float total = saleTest.getTotalPrice();
         float expected = (testItemPrice*quantity);
@@ -93,7 +73,7 @@ public class SaleTest {
         float testItemPrice = 10;
         float testItemVAT = 0.25f;
         
-        Item testItem = new Item(1, "test", testItemPrice, testItemVAT);
+        ItemDTO testItem = new ItemDTO(1, "test", testItemPrice, testItemVAT);
         saleTest.addItemToSale(testItem, quantity);
         float total = saleTest.getTotalVAT();
         float expected = (testItemPrice*(testItemVAT)*quantity);
@@ -110,9 +90,9 @@ public class SaleTest {
         float testItemPrice2 = 8;
         float testItemVAT2 = 0.06f;
         
-        Item testItem1 = new Item(1, "test", testItemPrice1, testItemVAT1);
+        ItemDTO testItem1 = new ItemDTO(1, "test", testItemPrice1, testItemVAT1);
         saleTest.addItemToSale(testItem1, quantity1);
-        Item testItem2 = new Item(2, "test", testItemPrice2, testItemVAT2);
+        ItemDTO testItem2 = new ItemDTO(2, "test", testItemPrice2, testItemVAT2);
         saleTest.addItemToSale(testItem2, quantity2);
         float total = saleTest.getTotalPriceIncludingVAT();
         float expected = (testItemPrice1*(1+testItemVAT1)*quantity1)+(testItemPrice2*(1+testItemVAT2)*quantity2);
