@@ -1,11 +1,15 @@
 C:\Users\PC\Documents\NetBeansProjects\pos\src\main\java\se\kth\iv1350\pos\startup\Main.java
 C:\Users\PC\Documents\NetBeansProjects\pos\src\main\java\se\kth\iv1350\pos\dto\ItemDTO.java
 C:\Users\PC\Documents\NetBeansProjects\pos\src\main\java\se\kth\iv1350\pos\integration\InventorySystem.java
+C:\Users\PC\Documents\NetBeansProjects\pos\src\main\java\se\kth\iv1350\pos\controller\DataBaseFailedException.java
+C:\Users\PC\Documents\NetBeansProjects\pos\src\main\java\se\kth\iv1350\pos\model\ItemNotInSystemException.java
+C:\Users\PC\Documents\NetBeansProjects\pos\src\main\java\se\kth\iv1350\pos\integration\InventorySystemException.java
+C:\Users\PC\Documents\NetBeansProjects\pos\src\main\java\se\kth\iv1350\pos\view\TotalRevenueView.java
+C:\Users\PC\Documents\NetBeansProjects\pos\src\main\java\se\kth\iv1350\pos\dto\Receipt.java
+C:\Users\PC\Documents\NetBeansProjects\pos\src\main\java\se\kth\iv1350\pos\Util\ExceptionLogHandler.java
 C:\Users\PC\Documents\NetBeansProjects\pos\src\main\java\se\kth\iv1350\pos\view\View.java
 C:\Users\PC\Documents\NetBeansProjects\pos\src\main\java\se\kth\iv1350\pos\view\TotalRevenueFileOutput.java
 C:\Users\PC\Documents\NetBeansProjects\pos\src\main\java\se\kth\iv1350\pos\integration\AccountingSystem.java
 C:\Users\PC\Documents\NetBeansProjects\pos\src\main\java\se\kth\iv1350\pos\model\Sale.java
 C:\Users\PC\Documents\NetBeansProjects\pos\src\main\java\se\kth\iv1350\pos\controller\Controller.java
 C:\Users\PC\Documents\NetBeansProjects\pos\src\main\java\se\kth\iv1350\pos\model\Register.java
-C:\Users\PC\Documents\NetBeansProjects\pos\src\main\java\se\kth\iv1350\pos\view\TotalRevenueView.java
-C:\Users\PC\Documents\NetBeansProjects\pos\src\main\java\se\kth\iv1350\pos\dto\Receipt.java

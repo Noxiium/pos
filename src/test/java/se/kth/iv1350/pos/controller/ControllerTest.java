@@ -8,6 +8,7 @@ import se.kth.iv1350.pos.dto.ItemDTO;
 import se.kth.iv1350.pos.integration.AccountingSystem;
 import se.kth.iv1350.pos.integration.InventorySystem;
 import se.kth.iv1350.pos.dto.Receipt;
+import se.kth.iv1350.pos.model.ItemNotInSystemException;
 import se.kth.iv1350.pos.model.Register;
 import se.kth.iv1350.pos.model.Sale;
 
@@ -48,14 +49,48 @@ public class ControllerTest {
     @Test
     public void testAddItemToSale() {
         controller.startNewSale();
-        ItemDTO itemTest = controller.addItemToSale(1, 0);
+        try{
+        ItemDTO itemTest = controller.addItemToSale(1, 1);
         assertNotNull(itemTest, "Add item did not work");
+        }
+        catch (Exception ex){
+            fail("Gave exception");
+        }
+    }
+    
+    @Test
+    public void testAddItemToSaleWrongID(){
+        controller.startNewSale();
+        try {
+            controller.addItemToSale(1000, 1);
+        }
+        catch (ItemNotInSystemException exc) {
+            return;
+        }
+        catch (DataBaseFailedException exc) {
+            fail("Gave wrong exception");
+        }
+        fail("Gave no exception");
+    }
+        
+    @Test
+    public void testDataBaseFailedException(){
+            controller.startNewSale();
+        try {
+            controller.addItemToSale(100, 1);
+        }
+        catch (DataBaseFailedException exc) {
+            return;
+        }
+        catch (ItemNotInSystemException exc) {
+            fail("Gave wrong exception");
+        }
+        fail("Gave no exception"); 
     }
 
     @Test
     public void testEndSale() {
         controller.startNewSale();
-        controller.addItemToSale(1, 1);
         try {
             controller.endSale(50);
         }
@@ -66,6 +101,7 @@ public class ControllerTest {
 
     @Test
     public void testGetTotalPriceOfSale() {
+        try{
         controller.startNewSale();
         ItemDTO item1 = controller.addItemToSale(1, 1);
         ItemDTO item2 = controller.addItemToSale(2, 2);
@@ -75,5 +111,8 @@ public class ControllerTest {
                         (item2.getItemPrice() * item1.getItemVAT()));
         float result = controller.getTotalPriceOfSale();
         assertEquals(expected, result);
+        } catch (Exception exc){
+            fail("Gave exception");
+        }
     }
 }

@@ -6,6 +6,8 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
+import se.kth.iv1350.pos.model.ItemNotInSystemException;
+import se.kth.iv1350.pos.model.Sale;
 
 public class InventorySystemTest {
     private ItemDTO item;
@@ -20,24 +22,33 @@ public class InventorySystemTest {
     public void tearDown() {
         inventorySystem = null;
     }
-
+    
     @Test
-    public void testAddItemToInventoryandSale() {
-        int testID = 5;
-        ItemDTO testItem = new ItemDTO(testID, "test", 10, 0.25f);
-        inventorySystem.addItemToInventory(testItem, 10);
-        ItemDTO testResult = inventorySystem.returnItemToSale(testID);
-        assertEquals(testItem, testResult, "Searched item could not be found");
+    public void InventorySystemExceptionTest(){
+        try{
+            inventorySystem.returnItemToSale(100);
+        }
+        catch (InventorySystemException InvSysExc){
+            return;
+        }
+        catch (ItemNotInSystemException ItNoInSysExc){
+            fail("Wrong exception was thrown");
+        }
+        fail("No expected exception was thrown");
     }
     
     @Test
-    public void testFillInventory(){
-        int testID = 3;
-        ItemDTO testResult = inventorySystem.returnItemToSale(testID);
-        float result = testResult.getItemPrice();
-        float exp = 10;
-        assertEquals(exp, result, "FillInventory did not work when inventorySystem was created");
-    }
+    public void returnItemToSaleWrongIdTest(){
+        try{
+            inventorySystem.returnItemToSale(1000);
+        }
+        catch (ItemNotInSystemException ItNoInSysExc) {
+            return;
+        }
+        fail("No expected exception was thrown");
+    }   
+    
+    
     
     @Test
     public void testUpdateInventory(){
@@ -48,7 +59,7 @@ public class InventorySystemTest {
         soldItemsTest.put(testItem2, 1);
         inventorySystem.updateInventory(soldItemsTest);
         int result1 = inventorySystem.getInventoryQuantity(1);
-        int expR = 8;
-        assertEquals(expR, result1, "Did not update inventory correctly ");
+        int expected = 8;
+        assertEquals(expected, result1, "Did not update inventory correctly ");
     }
 }

@@ -1,11 +1,17 @@
 package se.kth.iv1350.pos.controller;
 
+import java.util.ArrayList;
+import java.util.List;
 import se.kth.iv1350.pos.integration.AccountingSystem;
 import se.kth.iv1350.pos.integration.InventorySystem;
 import se.kth.iv1350.pos.dto.ItemDTO;
 import se.kth.iv1350.pos.dto.Receipt;
+import se.kth.iv1350.pos.integration.InventorySystemException;
+import se.kth.iv1350.pos.model.ItemNotInSystemException;
 import se.kth.iv1350.pos.model.Register;
 import se.kth.iv1350.pos.model.Sale;
+import se.kth.iv1350.pos.Util.ExceptionLogHandler;
+import se.kth.iv1350.pos.model.RegisterRevenueObserver;
 
 /**
  * The only controller for the POS system. 
@@ -16,6 +22,7 @@ public class Controller {
     private InventorySystem inventorySystem;
     private Sale sale;
     private Register cashRegister;
+    private List<RegisterRevenueObserver> RegisterRevenueObserver = new ArrayList<>();
     
     /**
      * Creates a new instance.
@@ -37,12 +44,21 @@ public class Controller {
      * Gets information from inventory system and adds item to sale.
      * @param id Identifier of scanned item
      * @param quantity Amount of items to add
-     * @return 
+     * @return the item that was scanned
+     * @throws InventorySystemException if there is a problem with the database
+     * @throws ItemNotInSystemException if there is no item with matching item ID
      */
-    public ItemDTO addItemToSale(int id, int quantity) {
+    public ItemDTO addItemToSale(int id, int quantity) throws ItemNotInSystemException, DataBaseFailedException{
+        try {
         ItemDTO item = inventorySystem.returnItemToSale(id);
         sale.addItemToSale(item, quantity);
         return item;
+        }
+        catch (InventorySystemException InvSysExc){
+            ExceptionLogHandler.logException(InvSysExc);
+            throw new DataBaseFailedException();
+        }
+            
     }
     
     /**
@@ -74,5 +90,10 @@ public class Controller {
      */
     public Receipt getReceipt(Sale sale){
         return new Receipt(sale);
+    }
+    
+    public void addRegisterRevenueObserver(RegisterRevenueObserver obs) {
+        cashRegister.addRegisterRevenueObserver(obs);
+        
     }
 }

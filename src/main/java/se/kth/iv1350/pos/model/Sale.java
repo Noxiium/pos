@@ -4,6 +4,7 @@ import java.time.LocalTime;
 import java.util.Date;
 import java.util.HashMap;
 import se.kth.iv1350.pos.dto.ItemDTO;
+import se.kth.iv1350.pos.integration.InventorySystemException;
 
 /**
  * Represents a Sale. Containing Sale information and can calculate price of the sale. 
@@ -16,6 +17,7 @@ public class Sale {
     private float totalPriceIncludingVAT;
     private HashMap<ItemDTO, Integer> listOfAllItemsInCurrentSale;
     private int totalQuantityOfItemsInSale;
+    private ItemDTO latestAddedItem;
     
     /**
      * Creates a new instance of Sale
@@ -51,7 +53,10 @@ public class Sale {
     
     public int getTotalQuantityOfItemsInSale(){
             return totalQuantityOfItemsInSale;
-        
+    }
+    
+    public ItemDTO getLatestAddedItem(){
+        return latestAddedItem;
     }
     
     /**
@@ -59,8 +64,10 @@ public class Sale {
      *  If item does not exist in current sale the item is added to the hashmap using .put
      * @param item that corresponds to the itemID scanned
      * @param quantity. The quantity of said item to add
+     * @throws InventorySystemException if there is a problem with the database
+     * @throws ItemNotInSystemException if there is no item with matching item ID
      */
-    public void addItemToSale(ItemDTO item, int quantity){
+    public void addItemToSale(ItemDTO item, int quantity)throws ItemNotInSystemException, InventorySystemException{
         if(checkIfItemIsInCurrentSale(item)){
             int prevQuantity = listOfAllItemsInCurrentSale.get(item);
             listOfAllItemsInCurrentSale.replace(item, prevQuantity+quantity);
@@ -71,6 +78,7 @@ public class Sale {
             
         CalculateTotalIncludingVAT(item, quantity);
         totalQuantityOfItemsInSale += quantity;
+        latestAddedItem = item;
     }
     
     /**
@@ -78,7 +86,7 @@ public class Sale {
      * @param item to check
      * @return boolean
      */
-    public boolean checkIfItemIsInCurrentSale(ItemDTO item){
+    private boolean checkIfItemIsInCurrentSale(ItemDTO item){
         for(ItemDTO i : listOfAllItemsInCurrentSale.keySet()){
             if(i.getItemID() == item.getItemID())
                 return true; 
@@ -91,5 +99,4 @@ public class Sale {
         totalVAT += item.getItemPrice()*item.getItemVAT()*quantity;
         totalPriceIncludingVAT = totalPrice + totalVAT;
     }
-   
 }

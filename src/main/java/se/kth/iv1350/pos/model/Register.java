@@ -1,5 +1,7 @@
 package se.kth.iv1350.pos.model;
 
+import java.util.ArrayList;
+import java.util.List;
 import se.kth.iv1350.pos.dto.Receipt;
 import se.kth.iv1350.pos.dto.ItemDTO;
 
@@ -9,12 +11,13 @@ import se.kth.iv1350.pos.dto.ItemDTO;
  */
 public class Register {
     private float amountInRegister;
+    private List<RegisterRevenueObserver> registerRevenueObserver = new ArrayList<>();
     
     /**
      * Creates an instance. Sets the amount to 1000.
      */
     public Register(){
-        amountInRegister = 1000;
+        amountInRegister = 0;
     }
     
     public float getAmountInRegister(){
@@ -27,6 +30,17 @@ public class Register {
      */
     public void updateAmountInRegister(float total){
         amountInRegister += total;
+        notifyObserver();
+    }
+    
+    private void notifyObserver(){
+        for (RegisterRevenueObserver obs : registerRevenueObserver) {
+            obs.updateTotalRevenue(amountInRegister);
+        }
+    }
+    
+    public void addRegisterRevenueObserver(RegisterRevenueObserver obs) {
+        registerRevenueObserver.add(obs);
     }
     
     /**
@@ -46,6 +60,6 @@ public class Register {
         System.out.println("Amount Paid: " + payment + " kr");
         System.out.println("Change: " + changeToGiveToCustomer + " kr");
         System.out.println("##########################");
-       
+        System.out.println();
     }
 }

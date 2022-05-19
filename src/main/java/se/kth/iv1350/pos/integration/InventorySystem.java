@@ -1,5 +1,6 @@
 package se.kth.iv1350.pos.integration;
 
+import se.kth.iv1350.pos.model.ItemNotInSystemException;
 import se.kth.iv1350.pos.dto.ItemDTO;
 import java.util.HashMap;
 
@@ -26,13 +27,18 @@ public class InventorySystem {
      * Check if the item is in the system and adds it to sale
      * @param itemID 
      * @return the item corresponding to correct itemID
+     * @throws InventorySystemException if there is a problem with the database
+     * @throws ItemNotInSystemException if there is no item with matching item ID
      */
-    public ItemDTO returnItemToSale(int itemID){
-       for(ItemDTO item : inventory.keySet()) {
+    public ItemDTO returnItemToSale(int itemID) throws ItemNotInSystemException, InventorySystemException {
+       if (itemID == 100){
+           throw new InventorySystemException("ERROR ERROR! SELF EXPLODE (Can't reach DataBase)");
+       }
+       
+       for(ItemDTO item : inventory.keySet()) 
            if (item.getItemID()==itemID) 
                return item;
-		}
-       return null;
+       throw new ItemNotInSystemException(itemID);
     }
     
     private void fillInventory(){

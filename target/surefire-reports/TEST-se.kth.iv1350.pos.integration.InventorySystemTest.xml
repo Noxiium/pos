@@ -16,7 +16,7 @@
     <property name="sun.java.launcher" value="SUN_STANDARD"/>
     <property name="user.country" value="US"/>
     <property name="sun.boot.library.path" value="C:\Program Files\Java\jdk-18.0.1\bin"/>
-    <property name="sun.java.command" value="C:\Users\PC\AppData\Local\Temp\surefire17609861615029469531\surefirebooter4175234761277506036.jar C:\Users\PC\AppData\Local\Temp\surefire17609861615029469531 2022-05-12T16-01-39_133-jvmRun1 surefire15063037287160141422tmp surefire_01273571821227800111tmp"/>
+    <property name="sun.java.command" value="C:\Users\PC\AppData\Local\Temp\surefire12052766142457301190\surefirebooter11284466375650193707.jar C:\Users\PC\AppData\Local\Temp\surefire12052766142457301190 2022-05-19T16-06-27_798-jvmRun1 surefire3418561579626596997tmp surefire_09038028602151051629tmp"/>
     <property name="jdk.debug" value="release"/>
     <property name="surefire.test.class.path" value="C:\Users\PC\Documents\NetBeansProjects\pos\target\test-classes;C:\Users\PC\Documents\NetBeansProjects\pos\target\classes;C:\Users\PC\.m2\repository\org\junit\jupiter\junit-jupiter-api\5.6.0\junit-jupiter-api-5.6.0.jar;C:\Users\PC\.m2\repository\org\apiguardian\apiguardian-api\1.1.0\apiguardian-api-1.1.0.jar;C:\Users\PC\.m2\repository\org\opentest4j\opentest4j\1.2.0\opentest4j-1.2.0.jar;C:\Users\PC\.m2\repository\org\junit\platform\junit-platform-commons\1.6.0\junit-platform-commons-1.6.0.jar;C:\Users\PC\.m2\repository\org\junit\jupiter\junit-jupiter-params\5.6.0\junit-jupiter-params-5.6.0.jar;C:\Users\PC\.m2\repository\org\junit\jupiter\junit-jupiter-engine\5.6.0\junit-jupiter-engine-5.6.0.jar;C:\Users\PC\.m2\repository\org\junit\platform\junit-platform-engine\1.6.0\junit-platform-engine-1.6.0.jar;"/>
     <property name="sun.cpu.endian" value="little"/>
@@ -31,7 +31,7 @@
     <property name="line.separator" value="&#10;"/>
     <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
     <property name="java.specification.name" value="Java Platform API Specification"/>
-    <property name="surefire.real.class.path" value="C:\Users\PC\AppData\Local\Temp\surefire17609861615029469531\surefirebooter4175234761277506036.jar"/>
+    <property name="surefire.real.class.path" value="C:\Users\PC\AppData\Local\Temp\surefire12052766142457301190\surefirebooter11284466375650193707.jar"/>
     <property name="user.script" value=""/>
     <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
     <property name="java.runtime.version" value="18.0.1+10-24"/>
@@ -57,7 +57,7 @@
     <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
     <property name="java.class.version" value="62.0"/>
   </properties>
-  <testcase name="testAddItemToInventoryandSale" classname="se.kth.iv1350.pos.integration.InventorySystemTest" time="0"/>
+  <testcase name="InventorySystemExceptionTest" classname="se.kth.iv1350.pos.integration.InventorySystemTest" time="0"/>
   <testcase name="testUpdateInventory" classname="se.kth.iv1350.pos.integration.InventorySystemTest" time="0"/>
-  <testcase name="testFillInventory" classname="se.kth.iv1350.pos.integration.InventorySystemTest" time="0"/>
+  <testcase name="returnItemToSaleWrongIdTest" classname="se.kth.iv1350.pos.integration.InventorySystemTest" time="0"/>
 </testsuite>
