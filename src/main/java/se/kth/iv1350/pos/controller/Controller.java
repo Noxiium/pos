@@ -92,8 +92,13 @@ public class Controller {
         return new Receipt(sale);
     }
     
+    
+    /**
+     * Specified observer will be called when the total amount
+     * in register is updated.
+     * @param obs Observer to call
+     */
     public void addRegisterRevenueObserver(RegisterRevenueObserver obs) {
         cashRegister.addRegisterRevenueObserver(obs);
-        
     }
 }
