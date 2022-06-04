@@ -14,6 +14,7 @@ import se.kth.iv1350.pos.model.ItemNotInSystemException;
 public class View {
     private Controller contr;
     private TotalRevenueView totalRevenueView;
+    private TotalRevenueFileOutput totalRevenueFileOutput;
     
     /**
      * Creates a new instance.
@@ -23,7 +24,9 @@ public class View {
     public View(Controller contr){
         this.contr = contr;
         totalRevenueView = new TotalRevenueView();
+        totalRevenueFileOutput = new TotalRevenueFileOutput();
         contr.addRegisterRevenueObserver(totalRevenueView);
+        contr.addRegisterRevenueObserver(totalRevenueFileOutput);
     }
     
     /**
